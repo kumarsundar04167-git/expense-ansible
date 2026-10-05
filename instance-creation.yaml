@@ -82,7 +82,5 @@
         image_id: "{{ image_id }}"
         region: us-east-1
         wait: false
-        security_group: 
-          - "expense-{{ item }}"
      loop: "{{ instances }}"
      when: action == "delete"
