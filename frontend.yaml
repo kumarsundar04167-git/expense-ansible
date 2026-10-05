@@ -21,7 +21,7 @@
         state: present
     - name: downloading the code
       get_url:
-        url: curl -o /tmp/frontend.tar.gz https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-frontend-v3.tar.gz
+        url: https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-frontend-v3.tar.gz
         dest: /tmp/frontend.tar.gz
     - name: unzipping the code
       unarchive:
