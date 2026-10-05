@@ -1,5 +1,5 @@
 - name: expense instances creation
-  hosts: local
+  hosts: localhost
   connection: local
   vars: 
     instances: [ "mysql", "backend", "frontend", "lb" ]
