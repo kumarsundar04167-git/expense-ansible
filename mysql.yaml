@@ -8,7 +8,7 @@
        state: present 
    - name: enable and start the mysql
      service:
-       name: mysql server
+       name: mysqld
        state: started
        enabled: yes
    - name: set mysql root password
