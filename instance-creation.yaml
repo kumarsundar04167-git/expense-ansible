@@ -60,7 +60,6 @@
         overwrite: true
      when:
        - action == "delete"
-       - item == "lb"
 
    - name: delete r53 record
      amazon.aws.route53:
