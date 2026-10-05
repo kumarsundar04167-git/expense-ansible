@@ -15,7 +15,7 @@
       region: us-east-1
       security_groups:
         - "expense-{{ item }}"
-        - expence-common
+        - expense-common
      loop: "{{ instances }}"
      register: ec2_output
      when: action == "create"
