@@ -10,7 +10,7 @@
    - name: create ec2 instances
      amazon.aws.ec2_instance:
       instance_type: t3.micro
-      name: "expence-{{ item }}"
+      name: "expense-{{ item }}"
       image_id: "{{ image_id }}"
       region: us-east-1
       security_groups:
@@ -78,7 +78,7 @@
    - name: ec2 instance deletion
      amazon.aws.ec2_instance:
         state: absent
-        name: "expence-{{ item }}"
+        name: "expense-{{ item }}"
         instance_type: t3.micro
         image_id: "{{ image_id }}"
         region: us-east-1
