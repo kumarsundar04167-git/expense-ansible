@@ -78,7 +78,7 @@
    - name: ec2 instance deletion
      amazon.aws.ec2_instance:
         state: absent
-        name: "expense-{{ item }}"
+        name: "expence-{{ item }}"
         instance_type: t3.micro
         image_id: "{{ image_id }}"
         region: us-east-1
