@@ -67,7 +67,6 @@
         record: "{{ item }}.{{ domain_name }}"
         type: A
         ttl: 1
-        value: "{{ item.instances[0].private_ip_address }}"
         state: absent
         overwrite: true
      loop: "{{ instances }}"
