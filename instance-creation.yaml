@@ -59,7 +59,7 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: absent
         overwrite: true
-     loop: "{{ ec2_output.results }}"
+     loop: "{{ instances }}"
      when:
        - action == "delete"
        - item == "lb"
@@ -73,9 +73,10 @@
         value: "{{ item.instances[0].private_ip_address }}"
         state: absent
         overwrite: true
-     loop: "{{ ec2_output.results }}"
+     loop: "{{ instances }}"
      when:
        - action == "delete"
+       - item != "lb"
       
 
    - name: ec2 instance deletion
