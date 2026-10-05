@@ -29,7 +29,7 @@
         dest: /usr/share/nginx/html
         remote_src: yes
     - name: copying expense.configure
-      copy:
+      template:
         src: expense.conf.j2
         dest: /etc/nginx/default.d/expense.conf
     - name: restart the nginx
