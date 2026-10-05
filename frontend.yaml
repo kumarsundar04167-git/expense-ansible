@@ -27,6 +27,7 @@
       unarchive:
         src: /tmp/frontend.tar.gz
         dest: /usr/share/nginx/html
+        remote_src: yes
     - name: copying expense.configure
       copy:
         src: expense.conf.j2
