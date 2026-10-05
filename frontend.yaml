@@ -18,7 +18,7 @@
     - name: creating directory
       file:
         path: /usr/share/nginx/html
-        state: present
+        state: directory
     - name: downloading the code
       get_url:
         url: https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-frontend-v3.tar.gz
