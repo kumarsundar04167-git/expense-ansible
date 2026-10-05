@@ -59,7 +59,7 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: absent
         overwrite: true
-     loop: "{{ ec2-output.results }}"
+     loop: "{{ ec2_output.results }}"
      when:
        - action == "delete"
        - item == "lb"
