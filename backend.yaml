@@ -1,0 +1,60 @@
+- name: configuring backend server
+  hosts: backend
+  tasks:
+   - name: enable nodejs 20
+     command: dnf module enable nodejs:20 -y
+   - name: install nodejs
+     package: 
+       name: nodejs
+       state: present
+   - name: delete app directory
+     file:
+       path: /app
+       state: absent
+   - name: removing the backend zip file
+     file: 
+       path: /tmp/backend.tar.gz
+       state: absent
+   - name: creating app directory
+     file:
+       path: /app
+       state: directory
+   - name: creating system user of Expense
+     user:
+       name: Expense
+       system: yes
+       home: /app
+       shell: /sbin/nologin
+       comment: "expense system user"
+   - name: downloading the code
+     get_url:
+        url: curl -o /tmp/backend.tar.gz https://raw.githubusercontent.com/daws-90s/expense-documentation/refs/heads/main/artifacts/expense-backend-v3.tar.gz
+        dest: /tmp/backend.tar.gz
+   - name: unzipping the code into app directory
+     unarchive:
+        src: /tmp/backend.tar.gz
+        dest: /app
+        remote_src: yes
+   - name: install dependencies
+     community.general.npm:
+        path: /app
+   - name: copy backend sevice file
+     copy:
+        src: backend.service.j2
+        dest: /etc/systemd/system/backend.service
+   - name: install mysql client
+     package:
+        name: mysql
+        state: present
+   - name: load schema data
+     shell: mysql -h {{ MYSQL_HOST }} -u root -pExpenseApp@1 < /app/schema/backend.sql
+   - name: daemon_reload
+     systemd_service:
+        name: backend
+        daemon_reload: true
+   - name: enable and start the backend
+     service:
+        name: backend
+        state: started
+        enabled: yes
+  
