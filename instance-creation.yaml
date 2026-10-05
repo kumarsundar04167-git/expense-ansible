@@ -22,7 +22,6 @@
      amazon.aws.route53:
         region: us-east-1
         hosted_zone_id: Z04246872QFC8QNNXAS1U
-        zone: "{{ domain_name }}"
         record: "{{ item.item }}.{{ domain_name }}"
         type: A
         ttl: 1
@@ -30,6 +29,8 @@
         state: present
         overwrite: true
      loop: "{{ ec2_output.results }}"
+     loop_control:
+        label: "{{ item.item }}"
      when:
        - action == "create"
        - item.item != "lb"
@@ -38,7 +39,6 @@
      amazon.aws.route53:
         region: us-east-1
         hosted_zone_id: Z04246872QFC8QNNXAS1U
-        zone: "{{ domain_name }}"
         record: "{{ domain_name }}"
         type: A
         ttl: 1
@@ -46,6 +46,8 @@
         state: present
         overwrite: true
      loop: "{{ ec2-output.results }}"
+     loop_control:
+        label: "{{ item.item }}"
      when:
        - action == "create"
        - item.item == "lb"
@@ -54,7 +56,6 @@
      amazon.aws.route53:
         region: us-east-1
         hosted_zone_id: Z04246872QFC8QNNXAS1U
-        zone: "{{ domain_name }}"
         record: "{{ domain_name }}"
         type: A
         ttl: 1
@@ -70,7 +71,6 @@
      amazon.aws.route53:
         region: us-east-1
         hosted_zone_id: Z04246872QFC8QNNXAS1U
-        zone: "{{ domain_name }}"
         record: "{{ item.item }}.{{ domain_name }}"
         type: A
         ttl: 1
