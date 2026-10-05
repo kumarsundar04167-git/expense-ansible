@@ -20,7 +20,7 @@
      file:
        path: /app
        state: directory
-   - name: creating system user of eastxpense
+   - name: creating system user of expense
      user:
        name: expense
        system: yes
