@@ -43,7 +43,7 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: present
         overwrite: true
-     loop: "{{ ec2-output.results }}"
+     loop: "{{ ec2_output.results }}"
      loop_control:
         label: "{{ item.item }}"
      when:
