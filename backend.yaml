@@ -22,7 +22,7 @@
        state: directory
    - name: creating system user of Expense
      user:
-       name: Expense
+       name: expense
        system: yes
        home: /app
        shell: /sbin/nologin
