@@ -16,9 +16,9 @@
       security_groups:
         - "expense-{{ item }}"
         - expence-common
-      loop: "{{ instances }}"
-      register: ec2_output
-      when: action == "create"
+     loop: "{{ instances }}"
+     register: ec2_output
+     when: action == "create"
    - name: create r53 record
      amazon.aws.route53:
         region: us-east-1
@@ -88,5 +88,5 @@
         security_group: 
           - expense-common
           - "expense-{{ item }}"
-        loop: "{{ instances }}"
-        when: action == "delete"
+     loop: "{{ instances }}"
+     when: action == "delete"
