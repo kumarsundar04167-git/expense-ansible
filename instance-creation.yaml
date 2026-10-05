@@ -15,7 +15,6 @@
       region: us-east-1
       security_groups:
         - "expense-{{ item }}"
-        - expense-common
      loop: "{{ instances }}"
      register: ec2_output
      when: action == "create"
@@ -86,7 +85,6 @@
         image_id: "{{ image_id }}"
         region: us-east1
         security_group: 
-          - expense-common
           - "expense-{{ item }}"
      loop: "{{ instances }}"
      when: action == "delete"
