@@ -1,6 +1,6 @@
-ansible_user=ec2-user
-ansible_password=DevOps321
+ansible_user: ec2-user
+ansible_password: DevOps321
 
-MYSQL_HOST=mysql.devopsonline.online
-BACKEND_HOST=backend.devopsonline.online
-FRONTEND_HOST=frontend.devopsonline.online
+MYSQL_HOST: mysql.devopsonline.online
+BACKEND_HOST: backend.devopsonline.online
+FRONTEND_HOST: frontend.devopsonline.online
