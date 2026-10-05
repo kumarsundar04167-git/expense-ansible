@@ -52,7 +52,7 @@
    - name: daemon_reload
      systemd_service:
         name: backend
-        daemon_reload: true
+        daemon_reload: yes
    - name: enable and start the backend
      service:
         name: backend
