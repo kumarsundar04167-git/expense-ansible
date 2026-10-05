@@ -2,22 +2,22 @@
   hosts: local
   connection: local
   vars: 
-    instances: ["mysql", "backend", "frontend", "lb"]
+    instances: [ "mysql", "backend", "frontend", "lb" ]
     image_id: ami-0220d79f3f480ecf5
     domain_name: devopsonline.online # replace with your domain
     action: create 
   tasks:
     - name: ec2 instance creation
-        amazon.aws.ec2_instance:
+      amazon.aws.ec2_instance:
         name: "expense- {{ instances }}"
         instance_type: t3.micro
-        image_id: {{ image_id }
+        image_id: "{{ image_id }}"
         region: us-east1
         security_group: 
           - expense-common
           - expense-{{ item }}
         loop: "{{ instances }}"
-        register= ec2_output
+        register: ec2_output
         when: action=="create"
 
     - name: create r53 record
@@ -84,11 +84,10 @@
       amazon.aws.ec2_instance:
         name: "expense- {{ instances }}"
         instance_type: t3.micro
-        image_id: {{ image_id }
+        image_id: "{{ image_id }}"
         region: us-east1
         security_group: 
           - expense-common
           - expense-{{ item }}
         loop: "{{ instances }}"
-        register= ec2_output
         when: action=="delete"
