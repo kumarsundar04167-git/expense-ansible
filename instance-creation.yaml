@@ -59,7 +59,6 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: absent
         overwrite: true
-     loop: "{{ instances }}"
      when:
        - action == "delete"
        - item == "lb"
