@@ -7,8 +7,8 @@
     domain_name: devopsonline.online # replace with your domain
     action: create 
   tasks:
-    - name: create ec2 instances
-      amazon.aws.ec2_instance:
+   - name: create ec2 instances
+     amazon.aws.ec2_instance:
       instance_type: t3.micro
       name: "expence-{{ item }}"
       image_id: "{{ image_id }}"
@@ -19,8 +19,8 @@
       loop: "{{ instances }}"
       register: ec2_output
       when: action == "create"
-    - name: create r53 record
-      amazon.aws.route53:
+   - name: create r53 record
+     amazon.aws.route53:
         region: us-east-1
         zone_id: "{{ domain_name }}"
         record: "{{ item.item }}.{{ domain_name }}"
@@ -29,13 +29,13 @@
         value: "{{ item.instances[0].private_ip_address }}"
         state: present
         overwrite: true
-      loop: "{{ ec2_output.results }}"
-      when:
+     loop: "{{ ec2_output.results }}"
+     when:
        - action == "create"
        - item.item != "lb"
 
-    - name: create r53 record for lb
-      amazon.aws.route53:
+   - name: create r53 record for lb
+     amazon.aws.route53:
         region: us-east-1
         zone_id: "{{ domain_name }}"
         record: "{{ domain_name }}"
@@ -44,13 +44,13 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: present
         overwrite: true
-      loop: "{{ ec2-output.results }}"
-      when:
+     loop: "{{ ec2-output.results }}"
+     when:
        - action == "create"
        - item.item == "lb"
 
-    - name: delete r53 record for lb
-      amazon.aws.route53:
+   - name: delete r53 record for lb
+     amazon.aws.route53:
         region: us-east-1
         zone_id: "{{ domain_name }}"
         record: "{{ domain_name }}"
@@ -59,13 +59,13 @@
         value: "{{ item.instances[0].public_ip_address }}"
         state: absent
         overwrite: true
-      loop: "{{ ec2-output.results }}"
-      when:
+     loop: "{{ ec2-output.results }}"
+     when:
        - action == "delete"
        - item.item == "lb"
 
-    - name: create r53 record
-      amazon.aws.route53:
+   - name: create r53 record
+     amazon.aws.route53:
         region: us-east-1
         zone_id: "{{ domain_name }}"
         record: "{{ item.item }}.{{ domain_name }}"
@@ -74,13 +74,13 @@
         value: "{{ item.instances[0].private_ip_address }}"
         state: absent
         overwrite: true
-      loop: "{{ ec2_output.results }}"
-      when:
+     loop: "{{ ec2_output.results }}"
+     when:
        - action == "delete"
        - item.item != "lb"
 
-    - name: ec2 instance deletion
-      amazon.aws.ec2_instance:
+   - name: ec2 instance deletion
+     amazon.aws.ec2_instance:
         name: "expense- {{ instances }}"
         instance_type: t3.micro
         image_id: "{{ image_id }}"
