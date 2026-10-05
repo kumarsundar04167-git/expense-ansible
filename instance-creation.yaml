@@ -2,7 +2,7 @@
   hosts: localhost
   connection: local
   vars: 
-    instances: [ "mysql", "backend", "frontend", "lb" ]
+    instances: ["mysql", "backend", "frontend", "lb"]
     image_id: ami-0220d79f3f480ecf5
     domain_name: devopsonline.online # replace with your domain
     action: create 
@@ -88,6 +88,6 @@
         region: us-east1
         security_group: 
           - expense-common
-          - expense-{{ item }}
+          - "expense-{{ item }}"
         loop: "{{ instances }}"
-        when: action=="delete"
+        when: action == "delete"
