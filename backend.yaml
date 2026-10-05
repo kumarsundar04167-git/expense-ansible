@@ -1,5 +1,6 @@
 - name: configuring backend server
   hosts: backend
+  become: yes
   tasks:
    - name: enable nodejs 20
      command: dnf module enable nodejs:20 -y
