@@ -1,0 +1,24 @@
+- name: configuring load balancer
+  hosts: lb
+  become: yes
+  tasks:
+  - name: intall nginx
+    package:
+       name: nginx
+       state: present
+  - name: removing directory
+    file:
+      path: /etc/nginx/nginx.conf
+      state: absent
+  - name: create directory
+    file:
+      path: /etc/nginx
+      state: directory
+  - name: copying lb.conf data
+    copy:
+      src: lb.conf.j2
+      dest: /etc/nginx/nginx.conf
+  - name: enable and start the nginx
+    service: 
+      state: started
+      enabled: yes
