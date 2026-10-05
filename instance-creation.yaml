@@ -63,7 +63,7 @@
        - action == "delete"
        - item.item == "lb"
 
-   - name: create r53 record
+   - name: delete r53 record
      amazon.aws.route53:
         region: us-east-1
         zone_id: "{{ domain_name }}"
